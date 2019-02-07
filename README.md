@@ -4,4 +4,4 @@ Los datos están actualizados hasta Jun. 8, 2018.
 
 El análisis se ha realizado con Python usando un notebook de Jupyter.
 
-De momento el análisis publicado sin depurar ni afinar la presentación.
+De momento el análisis está publicado sin depurar ni afinar la presentación.
