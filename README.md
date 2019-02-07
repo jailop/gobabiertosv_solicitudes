@@ -12,3 +12,4 @@ Las salidas corresponden a solicitudes de información por:
 - Rango de edad
 - Lugar de origen de los(as) solicitantes
 - Nivel educativo de los(as) solicitantes
+- Institución requerida

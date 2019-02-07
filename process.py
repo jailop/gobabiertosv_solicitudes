@@ -10,7 +10,7 @@ def by_sex(data):
     res = res / 1000
     fig = res.plot(kind='bar', alpha=0.5, title='Solicitudes por sexo')
     fig.set_ylabel('Miles de solicitudes')
-    fig.get_figure().savefig('plots/por-sexo.png', dpi=150, bbox_inches="tight", transparent=True)
+    fig.get_figure().savefig('chart/por-sexo.png', dpi=150, bbox_inches="tight", transparent=True)
     return res
 
 def by_place(data):
@@ -26,7 +26,12 @@ def by_education_level(data):
     res = res / 1000
     fig = res.plot(kind='bar', alpha=0.5, title='Solicitudes por nivel educativo')
     fig.set_ylabel('Miles de solicitudes')
-    fig.get_figure().savefig('plots/por-nivel-educativo.png', dpi=150, bbox_inches="tight", transparent=True)
+    fig.get_figure().savefig(
+        'chart/por-nivel-educativo.png', 
+        dpi=150, 
+        bbox_inches="tight", 
+        transparent=True
+    )
     return res
 
 def by_age(data):
@@ -40,13 +45,28 @@ def by_age(data):
         if idx >= edades[pos]:
             pos += 1
         freq[pos - 1] += tmp.iloc[idx]
-    res = pd.DataFrame({'Frecuencia': freq}, index=['[0-18]', '(18-30]', '(30-45]', '(45-60]', '>60'])
+    res = pd.DataFrame(
+        {'Frecuencia': freq}, 
+        index=['[0-18]', '(18-30]', '(30-45]', '(45-60]', '>60']
+    )
     res.to_excel('xlsx/por-rango-edad.xlsx', sheet_name='Por rangos de edad')
     res.to_csv('csv/por-rango-edad.csv')
     res = res / 1000
     fig = res.plot(kind='bar', alpha=0.5, title='Solicitudes por rango de edad')
     fig.set_ylabel('Miles de solicitudes')
-    fig.get_figure().savefig('plots/por-rango-edad.png', dpi=150, bbox_inches="tight", transparent=True)
+    fig.get_figure().savefig(
+        'chart/por-rango-edad.png', 
+        dpi=150, 
+        bbox_inches="tight", 
+        transparent=True
+    )
+    return res
+
+def by_unit(data):
+    res = pd.crosstab(data['Institución'], data['Año de admisión'])
+    res = res.sort_values(by=[2017, 2016, 2015, 2014], ascending=False)
+    res.to_excel('xlsx/por-institucion.xlsx', sheet_name='Por institucion')
+    res.to_csv('csv/por-institucion.csv')
     return res
 
 if __name__ == '__main__':
@@ -55,4 +75,5 @@ if __name__ == '__main__':
     by_place(data)
     by_education_level(data)
     by_age(data)
+    by_unit(data)
 
