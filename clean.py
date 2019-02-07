@@ -2,9 +2,6 @@
 
 import pandas as pd
 
-INPUT_FILE = 'input/solicitudes-draft.csv'
-OUTPUT_FILE = 'input/solicitudes.csv'
-
 def clean(data):
     res = data[~data['Año de admisión'].isnull()].fillna('NA').copy()
     res['Año de admisión'] = res['Año de admisión'].map(lambda x: int(x))
@@ -25,6 +22,8 @@ def clean(data):
     return res
 
 if __name__ == '__main__':
+    INPUT_FILE = 'input/solicitudes-draft.csv'
+    OUTPUT_FILE = 'input/solicitudes.csv'
     data = pd.read_csv(INPUT_FILE)
     data = clean(data)
     data.to_csv(OUTPUT_FILE, index=False)
